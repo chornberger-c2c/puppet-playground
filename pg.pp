@@ -11,7 +11,7 @@ class profile::site::postgres (
 ) {
 
 	class { 'postgresql::server':
-		}
+	}
 
 	postgresql::server::db { $db1:
 		user 	 => $user1,
