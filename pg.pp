@@ -19,7 +19,7 @@ class profile::site::postgres {
 
 	postgresql::server::database_grant {'dbno1':
 		privilege => 'ALL',
-		db	      => 'dbno1',
+		db	  => 'dbno1',
 		role	  => 'cho1',
 	}
 
