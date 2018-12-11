@@ -39,12 +39,12 @@ class profile::site::postgres (
                 role      => $role1,
         }
 
-        exec {'create table $table1':
+        exec { 'create table $table1':
                 command => "/bin/su - postgres -c '/usr/bin/psql $db2 -c \"CREATE TABLE $table1 (name varchar(20),item integer, indexno integer);\"'",
                 unless  => "/bin/su - postgres -c '/usr/bin/psql $db2 -c \"SELECT * from $table1;\"'",
         } ->
 
-        postgresql::server::table_grant {'$table1 of $db2':
+        postgresql::server::table_grant { '$table1 of $db2':
                 privilege => 'SELECT',
                 table     => $table1,
                 db        => $db2,
