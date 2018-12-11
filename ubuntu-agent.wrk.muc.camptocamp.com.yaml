@@ -1,0 +1,13 @@
+---
+profile::wordpress::port: 8080
+profile::wordpress::docroot: /srv/wordpress
+profile::wordpress::url: blog.company.io
+profile::site::postgres::db1: dbname1
+profile::site::postgres::user1: dbuser1
+profile::site::postgres::passwd1: 123456
+profile::site::postgres::db2: dbname2
+profile::site::postgres::user2: dbuser2
+profile::site::postgres::passwd2: 876543
+profile::site::postgres::role1: cho1
+profile::site::postgres::rolepw1: xxx
+profile::site::postgres::table1: table1

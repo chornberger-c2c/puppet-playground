@@ -1,39 +1,49 @@
-class profile::site::postgres {
+class profile::site::postgres (
+	$db1,
+	$user1,
+	$passwd1,
+	$db2,
+	$user2,
+	$passwd2,
+	$role1,
+	$rolepw1,
+	$table1,
+) {
 
 	class { 'postgresql::server':
 		}
 
-	postgresql::server::db {'dbno1':
-		user 	 => 'dbuser1',
-		password => postgresql_password('dbuser1','passwd1'),
+	postgresql::server::db { $db1:
+		user 	 => $user1,
+		password => postgresql_password($user1, $passwd1),
 	}
 
-	postgresql::server::db {'dbno2':
-                user     => 'dbuser1',
-                password => postgresql_password('dbuser1','passwd1'),
+	postgresql::server::db { $db2:
+                user     => $user2,
+                password => postgresql_password($user2, $passwd2),
         }
 
-	postgresql::server::role { 'cho1':
-		password_hash => postgresql_password('cho1','mypasswd123'),
+	postgresql::server::role { $role1:
+		password_hash => postgresql_password($role1, $rolepw1),
 	}
 
-	postgresql::server::database_grant {'dbno1':
+	postgresql::server::database_grant { $db1:
 		privilege => 'ALL',
-		db	  => 'dbno1',
-		role	  => 'cho1',
+		db	      => $db1,
+		role	  => $role1,
 	}
 
-	postgresql::server::database_grant {'dbno2':
+	postgresql::server::database_grant { $db2:
                 privilege => 'CONNECT',
-                db        => 'dbno2',
-                role      => 'cho1',
+                db        => $db2,
+                role      => $role1,
         }
 
-	postgresql::server::table_grant {'table1 of dbno2':
+	postgresql::server::table_grant {'$table1 of $db2':
 		privilege => 'ALL',
-		table     => 'table1',
-		db        => 'dbno2',
-		role      => 'cho1'
+		table     => $table1,
+		db        => $db2,
+		role      => $role1,
 	}
 
 }
