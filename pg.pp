@@ -11,7 +11,7 @@ class profile::site::postgres (
 ) {
 
 	class { 'postgresql::server':
-		}
+	}
 
 	postgresql::server::db { $db1:
 		user 	 => $user1,
@@ -29,7 +29,7 @@ class profile::site::postgres (
 
 	postgresql::server::database_grant { $db1:
 		privilege => 'ALL',
-		db	      => $db1,
+		db	  => $db1,
 		role	  => $role1,
 	}
 
