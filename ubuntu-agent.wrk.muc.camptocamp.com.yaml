@@ -1,5 +1,5 @@
 ---
-profile::wordpress::port: 8080
+profile::wordpress::port: 8080 
 profile::wordpress::docroot: /srv/wordpress
 profile::wordpress::url: blog.company.io
 profile::site::postgres::db1: dbname1
@@ -11,3 +11,7 @@ profile::site::postgres::passwd2: 876543
 profile::site::postgres::role1: cho1
 profile::site::postgres::rolepw1: xxx
 profile::site::postgres::table1: table1
+profile::site::postgres::column1: name
+profile::site::postgres::type_column1: varchar(20)
+profile::site::postgres::column2: number
+profile::site::postgres::type_column2: integer

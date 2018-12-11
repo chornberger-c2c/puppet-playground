@@ -8,6 +8,10 @@ class profile::site::postgres (
         $role1,
         $rolepw1,
         $table1,
+        $column1,
+        $type_column1,
+        $column2,
+        $type_column2,
 ) {
 
         class { 'postgresql::server':
@@ -39,15 +43,16 @@ class profile::site::postgres (
                 role      => $role1,
         }
 
-        exec { 'create table $table1':
-                command => "/bin/su - postgres -c '/usr/bin/psql $db2 -c \"CREATE TABLE $table1 (name varchar(20),item integer, indexno integer);\"'",
+        exec {'create table $table1':
+                command => "/bin/su - postgres -c '/usr/bin/psql $db2 -c \"CREATE TABLE $table1 ($column1 $type_column1, $column2 $type_column2);\"'",
                 unless  => "/bin/su - postgres -c '/usr/bin/psql $db2 -c \"SELECT * from $table1;\"'",
-        } ->
+        } -> 
 
-        postgresql::server::table_grant { '$table1 of $db2':
+        postgresql::server::table_grant {'$table1 of $db2':
                 privilege => 'SELECT',
                 table     => $table1,
                 db        => $db2,
                 role      => $role1,
         }
+
 }
