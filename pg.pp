@@ -50,3 +50,4 @@ class profile::site::postgres (
                 db        => $db2,
                 role      => $role1,
         }
+}
