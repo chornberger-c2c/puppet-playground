@@ -29,6 +29,8 @@ class profile::site::postgres (
 
         postgresql::server::role { $role1:
                 password_hash => postgresql_password($role1, $rolepw1),
+       		createdb      => true,
+		createrole    => true,
         }
 
         postgresql::server::database_grant { $db1:
